@@ -1,9 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -38,15 +39,15 @@ class _WorldClockState extends State<WorldClock> {
   ];
 
   final List<Duration> offsets = [
-    Duration(hours: -6, minutes: 30), // UTC
-    Duration(hours: -13, minutes: 30), // San Francisco
-    Duration(hours: -10, minutes: 30), // New York
-    Duration(hours: -5, minutes: 30), // London
-    Duration(hours: -2, minutes: 30), // Dubai
-    Duration(hours: 0), // Bangalore
-    Duration(hours: 2, minutes: 30), // Singapore
-    Duration(hours: 3, minutes: 30), // Tokyo
-    Duration(hours: 5, minutes: 30), // Sydney
+    Duration(hours: 0), // UTC
+    Duration(hours: -7), // San Francisco
+    Duration(hours: -4), // New York
+    Duration(hours: 1), // London
+    Duration(hours: 4), // Dubai
+    Duration(hours: 5, minutes: 30), // Bangalore
+    Duration(hours: 8), // Singapore
+    Duration(hours: 9), // Tokyo
+    Duration(hours: 11), // Sydney
   ];
 
   Map<String, String> times = {};
@@ -65,10 +66,10 @@ class _WorldClockState extends State<WorldClock> {
   }
 
   void updateTimes() {
-    DateTime now = DateTime.now();
+    DateTime utcTime = DateTime.now().toUtc();
 
     for (int i = 0; i < cities.length; i++) {
-      DateTime localTime = now.add(offsets[i]);
+      DateTime localTime = utcTime.add(offsets[i]);
       times[cities[i]] = DateFormat('HH:mm:ss').format(localTime);
     }
 
