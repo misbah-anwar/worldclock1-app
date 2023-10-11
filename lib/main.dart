@@ -37,6 +37,7 @@ class _WorldClockState extends State<WorldClock> {
     'Tokyo',
     'Sydney'
   ];
+  String date1 = "11-Oct-2023";
 
   final List<Duration> offsets = [
     Duration(hours: 0), // UTC
@@ -47,7 +48,7 @@ class _WorldClockState extends State<WorldClock> {
     Duration(hours: 5, minutes: 30), // Bangalore
     Duration(hours: 8), // Singapore
     Duration(hours: 9), // Tokyo
-    Duration(hours: 11), // Sydney
+    Duration(hours: 10), // Sydney
   ];
 
   Map<String, String> times = {};
@@ -70,7 +71,7 @@ class _WorldClockState extends State<WorldClock> {
 
     for (int i = 0; i < cities.length; i++) {
       DateTime localTime = utcTime.add(offsets[i]);
-      times[cities[i]] = DateFormat('HH:mm:ss').format(localTime);
+      times[cities[i]] = DateFormat('HH:mm').format(localTime);
     }
 
     setState(() {}); // Trigger a rebuild
@@ -82,8 +83,8 @@ class _WorldClockState extends State<WorldClock> {
       itemCount: cities.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
-          title: Text(cities[index]),
-          subtitle: Text(times[cities[index]] ?? ''),
+          title: Text(cities[index] + ": " + times[cities[index]]!),
+          subtitle: Text(date1),
         );
       },
     );
